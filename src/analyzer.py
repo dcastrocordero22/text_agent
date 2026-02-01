@@ -64,6 +64,19 @@ class TextAgent:
             key=lambda x: x[1],
             reverse=descendente
         )
+    #retorna las n palabras mas comunes
+    def top_palabras(self,n):
+        ordenadas= self.ordenar_por_frecuencia()
+        return ordenadas[:n]
+    #retorna las frecuencia de una palabra especifica si no existe retorna none
+    def frecuencia_palabra(self,palabra):
+        return self.frecuencias.get(palabra.lower())
+    # retorna la cantidad de palabras distitas encoentradas en el archivo
+    def total_palabras_distintas(self):
+        return len(self.frecuencias) 
+    # retorna la cantidad de tokenss o palabras procesadas excluye los stopwords
+    def total_palabras_procesadas(self):
+        return sum(self.frecuencias.values()) 
 
 
 
@@ -71,6 +84,11 @@ class TextAgent:
 
 if __name__ == "__main__":
     agent = TextAgent("data/input.csv")
-    top = agent.ordenar_por_frecuencia()
+    top = agent.top_palabras(5)
     print(top)
-    
+    top= agent.frecuencia_palabra("Verdader")
+    print(top)
+    top=agent.total_palabras_distintas()
+    print(top)
+    top=agent.total_palabras_procesadas()
+    print(top)
